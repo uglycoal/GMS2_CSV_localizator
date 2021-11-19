@@ -1,6 +1,9 @@
 function language_init(name){
 	//initializer of the actual text to use in game
 	//comment show_debug_message() stuff to hide display of parsed stuff
+	if ds_exists(global.dialoguemap,ds_type_map) {
+		ds_map_destroy(global.dialoguemap)
+	}
 	global.dialoguemap = ds_map_create();
 	var grid = load_csv("lang\\" + name);
 	if ds_exists(grid, ds_type_grid) { //prevents possible crash
@@ -55,6 +58,8 @@ function language_init(name){
 			ds_map_add(global.dialoguemap, key, str);
 			i++;
 		}
+		ds_grid_destroy(grid); //destroy the grid to prevent possible memory leak
+		return;
 	}
 	else show_message("Failed to load .csv file.");
 }

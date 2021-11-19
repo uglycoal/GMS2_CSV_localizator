@@ -1,4 +1,5 @@
 function language_load() {
+	global.dialoguemap = -1;
 	global.language_array = [];
 	global.language_extensions = [];
 	global.language_names = [];
